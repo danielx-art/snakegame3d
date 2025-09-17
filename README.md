@@ -10,4 +10,19 @@ This is a minimal, simple, fun, casual side project.
 [Website](https://danielx-art.github.io/portfolio/)
 [Blog/Journal](https://danielx-art.github.io/journal/en/?)
 
+### ToDo:
+1. Color palette everything
+2. Also snake coloring
+3. Set up camera for each mode
+4. Make advanced mode
+5. Make Settings Panel
+6. Insvestigate responsivity in small screens 
+7. Add support for touch devices
+    - it will come with a controls panel kinda like other games
+8. Add Game Over screen
+9. Add Start Screen
+10. Add about and author section
+11. (*Maybe*) Add share button to print the screen with the score and send it to other places
+12. (*Maybe*) Add first person camera option
+
 

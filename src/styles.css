@@ -1,5 +1,32 @@
 @import "tailwindcss";
 
+@theme {
+  --background: 4 6 16;        /* near-black with a cool blue tint */
+  --text: 230 245 255;         /* icy white-blue for high contrast */
+
+  --accent: 0 255 170;         /* neon aqua (cyanish green) */
+  --primary: 0 255 238;        /* electric cyan */
+  --secondary: 255 20 147;     /* hot pink (deep magenta) */
+  --neutral: 110 120 140;      /* cool gray with a bluish cast */
+
+  /* Supporting neon pops (optional extras) */
+  --glow-1: 191 0 255;         /* neon purple */
+  --glow-2: 255 255 0;         /* acid yellow */
+  --glow-3: 57 255 20;         /* matrix green */
+
+  --color-background: rgb(var(--background));
+  --color-accent: rgb(var(--accent));
+  --color-primary: rgb(var(--primary));
+  --color-secondary: rgb(var(--secondary));
+  --color-text: rgb(var(--text));
+  --color-neutral: rgb(var(--neutral));
+
+  /* Optional mapped colors */
+  --color-glow-1: rgb(var(--glow-1));
+  --color-glow-2: rgb(var(--glow-2));
+  --color-glow-3: rgb(var(--glow-3));
+}
+
 #root, body {
   height: 100dvh;
   min-height: 100dvh;
@@ -10,7 +37,7 @@
   line-height: 1.5;
   font-weight: 400;
 
-  color: rgba(255, 255, 255, 0.87);
+  color: rgb(var(--text));
 
   font-synthesis: none;
   text-rendering: optimizeLegibility;
