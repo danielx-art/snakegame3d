@@ -13,6 +13,8 @@ export type Controls = Record<DirectionKey, string>;
 
 export type GameColors = {
   snake: string;
+  snakeFront: string;
+  snakeBack: string;
   snakeHead: string;
   food: string;
   boundary: string;

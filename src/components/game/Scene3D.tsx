@@ -6,11 +6,12 @@ import MiniControlCube from "./MiniControlCube";
 import { setMainCamera } from "../../cameraSync";
 import type { Vec3 } from "../../game/store/types";
 import FaceGridLines from "./FaceGridLines";
-import SnakeMesh from "./SnakeMesh";
-import FoodMesh from "./FoodMesh";
 import { useRef } from "react";
 import * as THREE from "three";
 import { CELL } from "../../game/defaults";
+import AllInOneMesh from "./AllInOneMesh";
+import UniverseLines from "./UniverseLines";
+import UniverseLinesV2 from "./UniverseLinesV2";
 
 function CameraSync({ target }: { target: Vec3 }) {
   const { camera } = useThree();
@@ -56,9 +57,11 @@ export default function Scene3D() {
         <CameraSync target={center} />
         <ambientLight intensity={0.7} />
         <directionalLight position={[5, 10, 7]} intensity={0.9} />
-        <FaceGridLines />
-        <SnakeMesh />
-        <FoodMesh />
+        {/* <FaceGridLines /> */}
+        <UniverseLines />
+        <AllInOneMesh />
+        {/* <UniverseLinesV2 /> */}
+        <OrbitControls target={center} enablePan={false} />
         {cameraMode == "free" && <OrbitControls target={center} enablePan={false} />}
       </View>
       {showControlsInMinicube && <View
@@ -72,7 +75,6 @@ export default function Scene3D() {
           borderRadius: 10,
           overflow: "hidden",
           pointerEvents: "none",
-          background: "#000",
           boxShadow: "0 2px 10px rgba(0,0,0,0.35)",
         }}
       >

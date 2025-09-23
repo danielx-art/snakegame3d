@@ -3,11 +3,13 @@ import type { Defaults, RootState } from "./store/types";
 export const CELL = 0.5;
 
 export const DEFAULT_COLORS = {
-  snake: "#22c55e",
-  snakeHead: "#16a34a",
-  food: "#ef4444",
-  boundary: "#64748b",
-  background: "#0f172a",
+  snake: "#39FF14",
+  snakeFront: "#39FF14",
+  snakeBack: "#FFFF00",
+  snakeHead: "#F08A2E",
+  food: "#D83E4F",
+  boundary: "#00FFEE",
+  background: "#040610",
 };
 
 export const DEFAULT_CONTROLS: RootState["settings"]["controls"] = {
