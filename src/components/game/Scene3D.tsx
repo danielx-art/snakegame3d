@@ -5,13 +5,12 @@ import { useStore } from "../../game/store/store";
 import MiniControlCube from "./MiniControlCube";
 import { setMainCamera } from "../../cameraSync";
 import type { Vec3 } from "../../game/store/types";
-import FaceGridLines from "./FaceGridLines";
 import { useRef } from "react";
 import * as THREE from "three";
 import { CELL } from "../../game/defaults";
 import AllInOneMesh from "./AllInOneMesh";
 import UniverseLines from "./UniverseLines";
-import UniverseLinesV2 from "./UniverseLinesV2";
+//import UniverseLinesV2 from "./UniverseLinesV2";
 
 function CameraSync({ target }: { target: Vec3 }) {
   const { camera } = useThree();
@@ -57,7 +56,6 @@ export default function Scene3D() {
         <CameraSync target={center} />
         <ambientLight intensity={0.7} />
         <directionalLight position={[5, 10, 7]} intensity={0.9} />
-        {/* <FaceGridLines /> */}
         <UniverseLines />
         <AllInOneMesh />
         {/* <UniverseLinesV2 /> */}

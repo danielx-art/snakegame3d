@@ -35,8 +35,9 @@ export const useStore = create<RootState>()(
   persist(
     () => InitialState,
     {
-      name: "snake3d-store",
+      name: "snake-store",
       storage: createJSONStorage(() => localStorage),
+
       // Persist only JSON-safe parts
       partialize: (s): PersistedRootState => ({
         settings: s.settings,
@@ -57,17 +58,20 @@ export const useStore = create<RootState>()(
           showSettings: s.ui.showSettings,
         },
       }),
-      // Rebuild non-serializable structures after rehydration
+
       onRehydrateStorage: () => (state, error) => {
+
         if (error) {
           console.error("rehydration error", error);
           return;
         }
         if (!state) return;
+
         // Rebuild Map index from persisted cells
         const cells = state.game.free.cells ?? [];
         state.game.free.index = buildIndex(cells);
-        // Enforce any runtime-only tweaks
+
+        // Enforce runtime-only tweaks
         state.ui.paused = true;
         state.game.lastTickAt = null;
       },

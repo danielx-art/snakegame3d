@@ -9,7 +9,9 @@ export type GridDims = { w: number; h: number; d: number };
 
 export type DirectionKey = "UP" | "DOWN" | "LEFT" | "RIGHT" | "IN" | "OUT";
 
-export type Controls = Record<DirectionKey, string>;
+export type GeneralKey = "PAUSE" | "RESTART" | "SETTINGS";
+
+export type Controls = Record<DirectionKey|GeneralKey, string>;
 
 export type GameColors = {
   snake: string;

@@ -87,7 +87,7 @@ export function Dialog({
       }}
     >
       <div
-        className={cn(`${backdropClassName} bg-black/0.4 backdrop-blur-xl`)}
+        className={cn(`${backdropClassName} bg-black/0.4`)}
         onMouseDown={handleBackdropMouseDown}
         style={{
           position: "fixed",

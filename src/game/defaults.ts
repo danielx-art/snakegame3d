@@ -19,6 +19,9 @@ export const DEFAULT_CONTROLS: RootState["settings"]["controls"] = {
   LEFT: "KeyA",
   IN: "KeyQ",
   OUT: "KeyE",
+  PAUSE: "Space",
+  RESTART: "Enter",
+  SETTINGS: "Escape",
 };
 
 export const DEFAULT_EASY_MODE: Defaults["easy"] = {

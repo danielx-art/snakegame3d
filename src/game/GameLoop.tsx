@@ -4,6 +4,7 @@ import { useEffect } from "react";
 
 export function GameLoop() {
   const tickMs = useStore((s) => s.settings.tickMs);
+  const controls = useStore((s)=>s.settings.controls);
   const paused = useStore((s) => s.ui.paused);
   const gameOver = useStore((s) => s.game.gameOver);
   const snakeLen = useStore((s) => s.game.snake.length);
@@ -29,17 +30,18 @@ export function GameLoop() {
 
   useEffect(() => {
     const onKey = (e: KeyboardEvent) => {
-      if (e.code === "Space") {
+      console.log(e.code, controls); //debugg
+      if (e.code === controls.PAUSE) {
         e.preventDefault();
         togglePaused();
         return;
       }
-      if (e.code === "Enter") {
+      if (e.code === controls.RESTART) {
         e.preventDefault();
         restart();
         return;
       }
-      if (e.code === "Escape") {
+      if (e.code === controls.SETTINGS) {
         e.preventDefault();
         openSettings();
         return;
