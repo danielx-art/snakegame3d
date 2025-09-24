@@ -10,6 +10,7 @@ import * as THREE from "three";
 import { CELL } from "../../game/defaults";
 import AllInOneMesh from "./AllInOneMesh";
 import UniverseLines from "./UniverseLines";
+import IsometricOrthoCamera from "./IsometricOrthoCamera";
 //import UniverseLinesV2 from "./UniverseLinesV2";
 
 function CameraSync({ target }: { target: Vec3 }) {
@@ -25,7 +26,9 @@ function CameraSync({ target }: { target: Vec3 }) {
 }
 
 export default function Scene3D() {
-  const {cameraMode, dims, showControlsInMinicube} = useStore(s=>s.settings);
+  const { cameraMode, dims, showControlsInMinicube } = useStore(
+    (s) => s.settings
+  );
   const bg = useStore((s) => s.colors.background);
 
   const sx = dims.w * CELL;
@@ -33,14 +36,15 @@ export default function Scene3D() {
   const sz = dims.d * CELL;
   const center: Vec3 = [sx / 2, sy / 2, sz / 2];
 
-  const maxDim = Math.max(sx, sy, sz);
-  const camPos: Vec3 = [
-    center[0] + maxDim * 1.6,
-    center[1] + maxDim * 1.6,
-    center[2] + maxDim * 1.6,
-  ];
+  //const maxDim = Math.max(sx, sy, sz);
+  // const camPos: Vec3 = [
+  //   center[0] + maxDim * 1.6,
+  //   center[1] + maxDim * 1.6,
+  //   center[2] + maxDim * 1.6,
+  // ];
 
   const container = useRef<HTMLDivElement>(null);
+  const isoZoom = 80; // try 50–120 and adjust to taste
 
   return (
     <div
@@ -52,41 +56,54 @@ export default function Scene3D() {
         overflow: "hidden",
       }}
     >
-      <View id="main-view" style={{ position: "absolute", inset: 0, zIndex: 1 }}>
+      <View
+        id="main-view"
+        style={{ position: "absolute", inset: 0, zIndex: 1 }}
+      >
+        {/* Your scene content */}
         <CameraSync target={center} />
         <ambientLight intensity={0.7} />
         <directionalLight position={[5, 10, 7]} intensity={0.9} />
         <UniverseLines />
         <AllInOneMesh />
-        {/* <UniverseLinesV2 /> */}
-        {/* <OrbitControls target={center} enablePan={false} /> */}
-        {cameraMode == "free" && <OrbitControls target={center} enablePan={false} />}
+
+        <IsometricOrthoCamera center={center} zoom={isoZoom} />
+
+        {cameraMode === "free" && (
+          <OrbitControls
+            enableZoom={true}
+            minZoom={20}
+            maxZoom={160}
+            target={center}
+          />
+        )}
       </View>
-      {showControlsInMinicube && <View
-        id="controls-view"
-        style={{
-          position: "absolute",
-          right: 0,
-          top: 0,
-          width: 160,
-          height: 160,
-          borderRadius: 10,
-          overflow: "hidden",
-          pointerEvents: "none",
-          boxShadow: "0 2px 10px rgba(0,0,0,0.35)",
-        }}
-      >
-        <MiniControlCube />
-      </View>}
-      {container.current && (
-        <Canvas
-          camera={{ position: camPos, fov: 35 }}
-          eventSource={container.current}
-          style={{ position: "absolute", inset: 0 }}
+
+      {showControlsInMinicube && (
+        <View
+          id="controls-view"
+          style={{
+            position: "absolute",
+            right: 0,
+            top: 0,
+            width: 160,
+            height: 160,
+            borderRadius: 10,
+            overflow: "hidden",
+            pointerEvents: "none",
+            boxShadow: "0 2px 10px rgba(0,0,0,0.35)",
+          }}
         >
-          <View.Port />
-        </Canvas>
+          <MiniControlCube />
+        </View>
       )}
+
+      <Canvas
+        eventSource={container.current ?? undefined}
+        style={{ position: "absolute", inset: 0 }}
+      >
+        <View.Port />
+      </Canvas>
     </div>
   );
 }
