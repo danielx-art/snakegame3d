@@ -10,7 +10,7 @@ import * as THREE from "three";
 import { CELL } from "../../game/defaults";
 import AllInOneMesh from "./AllInOneMesh";
 import UniverseLines from "./UniverseLines";
-import IsometricOrthoCamera from "./IsometricOrthoCamera";
+//import IsometricOrthoCamera from "./IsometricOrthoCamera";
 //import UniverseLinesV2 from "./UniverseLinesV2";
 
 function CameraSync({ target }: { target: Vec3 }) {
@@ -36,15 +36,15 @@ export default function Scene3D() {
   const sz = dims.d * CELL;
   const center: Vec3 = [sx / 2, sy / 2, sz / 2];
 
-  //const maxDim = Math.max(sx, sy, sz);
-  // const camPos: Vec3 = [
-  //   center[0] + maxDim * 1.6,
-  //   center[1] + maxDim * 1.6,
-  //   center[2] + maxDim * 1.6,
-  // ];
+  const maxDim = Math.max(sx, sy, sz);
+  const camPos: Vec3 = [
+    center[0] + maxDim * 1.6,
+    center[1] + maxDim * 1.6,
+    center[2] + maxDim * 1.6,
+  ];
 
   const container = useRef<HTMLDivElement>(null);
-  const isoZoom = 80; // try 50–120 and adjust to taste
+  //const isoZoom = 80;
 
   return (
     <div
@@ -67,7 +67,7 @@ export default function Scene3D() {
         <UniverseLines />
         <AllInOneMesh />
 
-        <IsometricOrthoCamera center={center} zoom={isoZoom} />
+        {/* <IsometricOrthoCamera center={center} zoom={isoZoom} /> */}
 
         {cameraMode === "free" && (
           <OrbitControls
@@ -101,6 +101,7 @@ export default function Scene3D() {
       <Canvas
         eventSource={container.current ?? undefined}
         style={{ position: "absolute", inset: 0 }}
+        camera={{ position: camPos, fov: 35 }}
       >
         <View.Port />
       </Canvas>
