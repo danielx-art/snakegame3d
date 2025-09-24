@@ -35,9 +35,9 @@ export default function Scene3D() {
 
   const maxDim = Math.max(sx, sy, sz);
   const camPos: Vec3 = [
-    center[0] + maxDim * 1.2,
-    center[1] + maxDim * 1.2,
-    center[2] + maxDim * 1.2,
+    center[0] + maxDim * 1.6,
+    center[1] + maxDim * 1.6,
+    center[2] + maxDim * 1.6,
   ];
 
   const container = useRef<HTMLDivElement>(null);
@@ -59,7 +59,7 @@ export default function Scene3D() {
         <UniverseLines />
         <AllInOneMesh />
         {/* <UniverseLinesV2 /> */}
-        <OrbitControls target={center} enablePan={false} />
+        {/* <OrbitControls target={center} enablePan={false} /> */}
         {cameraMode == "free" && <OrbitControls target={center} enablePan={false} />}
       </View>
       {showControlsInMinicube && <View

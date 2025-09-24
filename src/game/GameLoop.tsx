@@ -30,7 +30,6 @@ export function GameLoop() {
 
   useEffect(() => {
     const onKey = (e: KeyboardEvent) => {
-      console.log(e.code, controls); //debugg
       if (e.code === controls.PAUSE) {
         e.preventDefault();
         togglePaused();

@@ -1,5 +1,5 @@
 import * as THREE from "three";
-import { useEffect, useMemo, useRef } from "react";
+import { useCallback, useEffect, useMemo, useRef } from "react";
 import { useFrame } from "@react-three/fiber";
 import { useStore } from "../../game/store/store";
 import { CELL } from "../../game/defaults";
@@ -114,7 +114,7 @@ export default function UniverseLinesV2() {
     }
   `;
 
-  const makeMaterial = (axis: THREE.Vector3) =>
+  const makeMaterial = useCallback((axis: THREE.Vector3) =>
     new THREE.RawShaderMaterial({
       vertexShader,
       fragmentShader,
@@ -137,11 +137,11 @@ export default function UniverseLinesV2() {
       depthWrite: false, // don't occlude snake; set true if you want occlusion
       depthTest: true,
       side: THREE.DoubleSide,
-    });
+    }) ,[colors.boundary, fragmentShader, vertexShader]);
 
-  const matX = useMemo(() => makeMaterial(new THREE.Vector3(1, 0, 0)), [colors.boundary]);
-  const matY = useMemo(() => makeMaterial(new THREE.Vector3(0, 1, 0)), [colors.boundary]);
-  const matZ = useMemo(() => makeMaterial(new THREE.Vector3(0, 0, 1)), [colors.boundary]);
+  const matX = useMemo(() => makeMaterial(new THREE.Vector3(1, 0, 0)), [makeMaterial]);
+  const matY = useMemo(() => makeMaterial(new THREE.Vector3(0, 1, 0)), [makeMaterial]);
+  const matZ = useMemo(() => makeMaterial(new THREE.Vector3(0, 0, 1)), [makeMaterial]);
 
   // Build transforms for beams
   useEffect(() => {
