@@ -17,4 +17,5 @@ export default defineConfig({
       // },
     }),
   ],
+  base: '/snakegame3d/'
 });
