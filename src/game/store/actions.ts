@@ -156,6 +156,9 @@ export function setTheme(partial: Partial<GameColors>): void {
   setState((prev) => {return {colors: {...partial, ...prev.colors} }});
 }
 
+export function setCameraType(t: "isometric" | "perspective"): void {
+  setState((prev) => ({ ...prev, settings: { ...prev.settings, cameraType: t } }));
+}
 
 export function setGrid(dims: GridDims): void {
   // Reinitialize free-cells and recenter snake safely on grid change

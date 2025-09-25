@@ -32,6 +32,7 @@ export const DEFAULT_EASY_MODE: Defaults["easy"] = {
   showControlsInHead: true,
   showControlsInMinicube: false,
   cameraMode: "fixed",
+  cameraType: "perspective",
   difficulty: "easy",
 };
 
@@ -43,6 +44,7 @@ export const DEFAULT_MEDIUM_MODE: Defaults["medium"] = {
   showControlsInHead: false,
   showControlsInMinicube: true,
   cameraMode: "free",
+  cameraType: "perspective",
   difficulty: "medium",
 };
 
@@ -54,6 +56,7 @@ export const DEFAULT_HARD_MODE: Defaults["hard"] = {
   showControlsInHead: false,
   showControlsInMinicube: false,
   cameraMode: "autoOrbit",
+  cameraType: "perspective",
   difficulty: "hard",
 };
 
@@ -65,6 +68,7 @@ export const DEFAULT_ADVANCED_MODE: Defaults["advanced"] = {
   showControlsInHead: false,
   showControlsInMinicube: false,
   cameraMode: "fixed",
+  cameraType: "2d",
   difficulty: "advanced",
 };
 
@@ -76,6 +80,7 @@ export const DEFAULT_CUSTOM_MODE: Defaults["custom"] = {
   showControlsInHead: true,
   showControlsInMinicube: false,
   cameraMode: "free",
+  cameraType: "perspective",
   difficulty: "custom",
 };
 

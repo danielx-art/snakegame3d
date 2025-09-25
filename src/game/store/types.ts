@@ -27,6 +27,8 @@ export type Difficulty = "easy" | "medium" | "hard" | "advanced" | "custom";
 
 export type CameraMode = "fixed" | "free" | "autoOrbit";
 
+export type CameraType = "isometric" | "perspective" | "2d";
+
 export type Settings = {
   dims: GridDims;
   wrap: boolean;
@@ -34,6 +36,7 @@ export type Settings = {
   showControlsInHead: boolean;
   showControlsInMinicube: boolean;
   cameraMode: CameraMode;
+  cameraType: CameraType;
   controls: Controls;
   difficulty: Difficulty;
 };
