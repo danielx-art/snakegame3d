@@ -35,7 +35,7 @@ export const useStore = create<RootState>()(
   persist(
     () => InitialState,
     {
-      name: "snake-store",
+      name: "snake-store-dev0",
       storage: createJSONStorage(() => localStorage),
 
       // Persist only JSON-safe parts

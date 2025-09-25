@@ -15,8 +15,6 @@ export function GameLoop() {
   }, [snakeLen]);
 
   useEffect(() => {
-    if (difficulty === "easy") return; // no auto-tick in easy mode
-
     let id: number | null = null;
     const tick = () => {
       step();

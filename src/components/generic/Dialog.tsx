@@ -15,7 +15,6 @@ export type DialogProps = {
   lockScroll?: boolean;
   ariaLabel?: string;
   role?: "dialog" | "alertdialog";
-  // style overrides
   style?: React.CSSProperties;
   backdropStyle?: React.CSSProperties;
   contentStyle?: React.CSSProperties;
@@ -75,39 +74,56 @@ export function Dialog({
 
   return createPortal(
     <div
-      className={className}
+      className={cn(
+        // wrapper background and stacking context
+        "fixed inset-0 grid place-items-center",
+        // ensure dialog sits above canvas/views but below high z-index popovers if any
+        "z-[100]",
+        className
+      )}
       aria-hidden={false}
       style={{
-        position: "fixed",
-        inset: 0,
-        zIndex: 1000,
-        display: "grid",
-        placeItems: "center",
         ...style,
       }}
     >
+      {/* Backdrop */}
       <div
-        className={cn(`${backdropClassName} bg-black/0.4`)}
+        className={cn(
+          // full-screen click target
+          "fixed inset-0",
+          // neon-ish dimmed backdrop: your background tint + subtle primary glow
+          "bg-background/80",
+          // optional soft glow ring (very subtle)
+          "ring-1 ring-primary/10",
+          backdropClassName
+        )}
         onMouseDown={handleBackdropMouseDown}
-        style={{
-          position: "fixed",
-          inset: 0,
-          ...backdropStyle,
-        }}
+        style={backdropStyle}
       />
+
+      {/* Content */}
       <div
         ref={containerRef}
         role={role}
         aria-modal="true"
         tabIndex={-1}
         {...(ariaLabel ? { "aria-label": ariaLabel } : {})}
-        className={contentClassName}
+        className={cn(
+          // base panel
+          "relative overflow-auto rounded-md",
+          // neon palette
+          "bg-background text-text border border-accent/40",
+          // soft shadow + subtle glow
+          "shadow-[0_10px_25px_rgba(0,0,0,0.35)]",
+          "ring-1 ring-primary/10",
+          // focus accessibility
+          "outline-none focus-visible:ring-2 focus-visible:ring-primary/40",
+          // spacing is provided by caller (you pass p-6, etc.)
+          // stacking context above backdrop, below high popovers
+          "z-[110]",
+          contentClassName
+        )}
         style={{
-          position: "relative",
-          zIndex: 1001,
-          overflow: "auto",
-          boxShadow:
-            "0 10px 15px -3px rgba(0,0,0,0.1), 0 4px 6px -2px rgba(0,0,0,0.05)",
           ...contentStyle,
         }}
       >

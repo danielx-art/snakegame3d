@@ -1,18 +1,14 @@
-import { Dialog } from "../generic/Dialog";
 import { useStore } from "../../game/store/store";
-import { closeSettings, openSettings } from "../../game/store/actions";
+import { openSettings } from "../../game/store/actions";
+import Button from "../generic/Button";
+import SettingsPanel from "./SettingsPanel";
 
-export default function Settings() {
-  
-  const isOpen = useStore((s)=>s.ui.showSettings)
+export default function SettingsButton() {
+  const isOpen = useStore((s) => s.ui.showSettings);
 
   return (
     <>
-      <button
-        aria-label="Open"
-        onClick={() => openSettings()}
-        className="cursor-pointer hover:text-primary"
-      >
+      <Button aria-label="Open" onClick={() => openSettings()} className="h-6 w-6 ">
         <svg
           xmlns="http://www.w3.org/2000/svg"
           fill="none"
@@ -32,29 +28,8 @@ export default function Settings() {
             d="M16 12 a4 4 0 1 1 -8 0 a4 4 0 0 1 8 0 Z"
           />
         </svg>
-      </button>
-      <Dialog
-        open={isOpen}
-        onClose={() => closeSettings()}
-        className="fixed inset-0 grid place-items-center"
-        backdropClassName="fixed inset-0 backdrop-blur-[2px]"
-        contentClassName="w-[560px] max-w-[90vw] rounded-lg bg-white p-6 shadow-xl"
-        ariaLabel="Settings"
-      >
-        <div className="flex items-start justify-between gap-4">
-          <h2 className="text-lg font-semibold">Settings</h2>
-        </div>
-        <div className="mt-4">
-          {/* your arbitrary children */}
-          <p>Hello!</p>
-        </div>
-        <div className="mt-6 flex justify-end gap-3">
-          <button onClick={() => closeSettings()} className="btn">
-            Close
-          </button>
-          <button className="btn-primary">Save</button>
-        </div>
-      </Dialog>
+      </Button>
+      <SettingsPanel isOpen={isOpen} />
     </>
   );
 }

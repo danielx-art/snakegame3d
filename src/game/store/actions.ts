@@ -1,5 +1,5 @@
 import { getState, setState } from "./store";
-import type { DirectionKey, Vec3, GameColors, FreeCells, GridDims } from "./types";
+import type { DirectionKey, Vec3, GameColors, FreeCells, GridDims, Settings } from "./types";
 
 const DIRS: Record<DirectionKey, Vec3> = {
   UP: [0, 1, 0],
@@ -112,7 +112,7 @@ export function restart(): void {
   initGame();
 }
 
-// UI controls
+// UI
 
 export function setPaused(paused: boolean): void {
   setState((prev) => ({ ...prev, ui: { ...prev.ui, paused } }));
@@ -126,8 +126,6 @@ export function setShowSettings(show: boolean): void {
   setState((prev) => ({ ...prev, ui: { ...prev.ui, showSettings: show } }));
 }
 
-// Settings actions
-
 export function openSettings(): void {
   setState((prev) => ({ ...prev, ui: { ...prev.ui, showSettings: true, paused: true } }));
 }
@@ -135,6 +133,8 @@ export function openSettings(): void {
 export function closeSettings(): void {
   setState((prev) => ({ ...prev, ui: { ...prev.ui, showSettings: false } }));
 }
+
+// Game Settings
 
 export function setDifficulty(d: "easy" | "medium" | "advanced"): void {
   setState((prev) => ({ ...prev, settings: { ...prev.settings, difficulty: d } }));
@@ -224,6 +224,11 @@ export function setNextDirectionByCode(code: string): void {
   if (settings.difficulty === "easy") {
     step();
   }
+}
+
+export function saveSettings(next: Partial<Settings>): void {
+  setState((prev) => ({ ...prev, settings: {...prev.settings, ...next} }));
+  initGame();
 }
 
 // Core tick using free-cells

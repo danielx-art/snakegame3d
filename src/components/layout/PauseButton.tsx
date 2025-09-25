@@ -1,22 +1,20 @@
 import { togglePaused } from "../../game/store/actions";
 import { useStore } from "../../game/store/store";
-import { cn } from "../../utils/cn";
+import Button from "../generic/Button";
 
+export default function PauseButton() {
+  const paused = useStore((s) => s.ui.paused);
 
-
-
-export default function PauseButton({...props}: React.HTMLAttributes<HTMLButtonElement>) {
-
-    const paused = useStore((s) => s.ui.paused);
-
-    return (<>
-    <button aria-label="pause" {...props} className={cn(`${props.className} hover:text-primary cursor-pointer h-6 w-6 inline-grid place-items-center`)} onClick={togglePaused}>
-        <div className="relative w-full h-full">
-            <PauseIcon className={`absolute inset-0 ${paused ? "visible" : "invisible"}`} />
-            <PlayIcon className={`absolute inset-0 ${paused ? "invisible" : "visible"}`} />
-        </div>
-    </button>
-    </>)
+  return (
+    <Button aria-label="pause" onClick={togglePaused} className="relative h-6 w-6 ">
+      <PauseIcon
+        className={`size-6 ${paused ? "visible" : "invisible"}`}
+      />
+      <PlayIcon
+        className={`absolute inset-0 size-6 ${paused ? "invisible" : "visible"}`}
+      />
+    </Button>
+  );
 }
 
 function PauseIcon(props: React.SVGProps<SVGSVGElement>) {

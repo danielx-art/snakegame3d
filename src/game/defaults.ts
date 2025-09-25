@@ -36,7 +36,7 @@ export const DEFAULT_EASY_MODE: Defaults["easy"] = {
   difficulty: "easy",
 };
 
-export const DEFAULT_MEDIUM_MODE: Defaults["medium"] = {
+export const DEFAULT_MEDIUM_MODE: Defaults["medium"] = { 
   dims: { w: 12, h: 12, d: 12 },
   wrap: false,
   tickMs: 160,
