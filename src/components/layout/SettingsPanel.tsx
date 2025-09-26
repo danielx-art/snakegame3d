@@ -106,7 +106,7 @@ export default function SettingsPanel({ isOpen }: { isOpen: boolean }) {
               <SelectItem value="medium">Medium</SelectItem>
               <SelectItem value="hard">Hard</SelectItem>
               <SelectItem value="advanced" disabled className="opacity-70">
-                Advanced (comming soon)
+                Advanced (maybe sometime XD)
               </SelectItem>
               <SelectItem value="custom">Custom</SelectItem>
             </SelectContent>
@@ -151,7 +151,7 @@ export default function SettingsPanel({ isOpen }: { isOpen: boolean }) {
             onChange={() => onToggle("wrap")}
           />
           <CheckboxRow
-            label="Show controls on head (comming soon)"
+            label="Show controls on head (maybe sometime XD)"
             checked={draft.showControlsInHead}
             onChange={() => onToggle("showControlsInHead")}
             disabled
@@ -178,7 +178,7 @@ export default function SettingsPanel({ isOpen }: { isOpen: boolean }) {
                 <SelectItem value="fixed">Fixed</SelectItem>
                 <SelectItem value="free">Free</SelectItem>
                 <SelectItem value="autoOrbit" disabled className="opacity-70">
-                  Auto Orbit (comming soon)
+                  Auto Orbit (maybe sometime XD)
                 </SelectItem>
               </SelectContent>
             </Select>
@@ -197,7 +197,7 @@ export default function SettingsPanel({ isOpen }: { isOpen: boolean }) {
                 <SelectItem value="perspective">Perspective</SelectItem>
                 <SelectItem value="isometric">Isometric</SelectItem>
                 <SelectItem value="2d" disabled className="opacity-70">
-                  2D (comming soon)
+                  2D (maybe sometime XD)
                 </SelectItem>
               </SelectContent>
             </Select>
@@ -208,7 +208,7 @@ export default function SettingsPanel({ isOpen }: { isOpen: boolean }) {
         <section className="space-y-3 my-2">
           <h3 className="text-sm ">Controls</h3>
           <p className="text-sm opacity-80">
-            Controls customization comming soon.
+            Controls customization maybe sometime XD.
           </p>
           {/* Example of calling toCustom when you integrate ControlsEditor:
             <ControlsEditor
