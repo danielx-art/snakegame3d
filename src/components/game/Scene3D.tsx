@@ -39,7 +39,7 @@ function fitPerspectiveDistance({
   fovDeg,
   aspect,
   bboxSize, // [sx, sy, sz]
-  margin = 1.15, // add ~15% padding
+  margin = 1.8,
 }: {
   fovDeg: number;
   aspect: number;
@@ -60,12 +60,11 @@ function fitPerspectiveDistance({
   return Math.max(distV, distH) * margin;
 }
 
-// Fit zoom for orthographic camera to ensure [sx, sy] fits viewport
 function fitOrthoZoom({
   viewportWidthPx,
   viewportHeightPx,
   bboxSize, // [sx, sy, sz]
-  margin = 1.15,
+  margin = 1.8,
 }: {
   viewportWidthPx: number;
   viewportHeightPx: number;
@@ -79,11 +78,11 @@ function fitOrthoZoom({
   return Math.min(zoomX, zoomY);
 }
 
-// Orthographic camera that auto-fits zoom based on canvas size and dims
+
 function IsometricOrthoCameraAuto({
   center,
   bbox,
-  margin = 1.15,
+  margin = 1.8,
 }: {
   center: [number, number, number];
   bbox: [number, number, number];
@@ -124,7 +123,7 @@ function FitPerspectiveOnChange({
   center,
   bbox,
   fovDeg,
-  margin = 1.15,
+  margin = 1.8,
   active,
 }: {
   center: [number, number, number];

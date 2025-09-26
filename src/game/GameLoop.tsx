@@ -15,6 +15,7 @@ export function GameLoop() {
   }, [snakeLen]);
 
   useEffect(() => {
+    if(tickMs === 0) return;
     let id: number | null = null;
     const tick = () => {
       step();

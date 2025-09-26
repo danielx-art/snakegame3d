@@ -75,9 +75,7 @@ export function Dialog({
   return createPortal(
     <div
       className={cn(
-        // wrapper background and stacking context
         "fixed inset-0 grid place-items-center",
-        // ensure dialog sits above canvas/views but below high z-index popovers if any
         "z-[100]",
         className
       )}
@@ -89,11 +87,8 @@ export function Dialog({
       {/* Backdrop */}
       <div
         className={cn(
-          // full-screen click target
           "fixed inset-0",
-          // neon-ish dimmed backdrop: your background tint + subtle primary glow
           "bg-background/80",
-          // optional soft glow ring (very subtle)
           "ring-1 ring-primary/10",
           backdropClassName
         )}
@@ -109,17 +104,11 @@ export function Dialog({
         tabIndex={-1}
         {...(ariaLabel ? { "aria-label": ariaLabel } : {})}
         className={cn(
-          // base panel
-          "relative overflow-auto rounded-md",
-          // neon palette
+          "relative rounded-md",
           "bg-background text-text border border-accent/40",
-          // soft shadow + subtle glow
           "shadow-[0_10px_25px_rgba(0,0,0,0.35)]",
           "ring-1 ring-primary/10",
-          // focus accessibility
           "outline-none focus-visible:ring-2 focus-visible:ring-primary/40",
-          // spacing is provided by caller (you pass p-6, etc.)
-          // stacking context above backdrop, below high popovers
           "z-[110]",
           contentClassName
         )}

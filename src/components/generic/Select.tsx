@@ -72,7 +72,7 @@ function SelectContent({
         data-slot="select-content"
         className={cn(
           // panel
-          "relative z-[300] min-w-[8rem] overflow-x-hidden overflow-y-auto rounded-md border bg-background text-text shadow-md",
+          "relative z-[200] min-w-[8rem] overflow-x-hidden overflow-y-auto rounded-md border bg-background text-text shadow-md",
           "border-accent/40",
           // open/close animations
           "data-[state=open]:animate-in data-[state=closed]:animate-out",

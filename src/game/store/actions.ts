@@ -220,8 +220,8 @@ export function setNextDirectionByCode(code: string): void {
   // Set nextDir
   setState((prev) => ({ ...prev, game: { ...prev.game, nextDir: next } }));
 
-  // In easy mode, move one step immediately on key press
-  if (settings.difficulty === "easy") {
+  // When tickMs === 0, move one step immediately on key press
+  if (settings.tickMs === 0) {
     step();
   }
 }

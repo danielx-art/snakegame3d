@@ -20,6 +20,7 @@ import {
 } from "../generic/Select";
 import { Checkbox } from "../generic/Checkbox";
 import { cn } from "../../utils/cn";
+import { ScrollArea, ScrollBar } from "../generic/ScrollArea";
 
 export default function SettingsPanel({ isOpen }: { isOpen: boolean }) {
   const currentSettings = useStore((s) => s.settings);
@@ -52,7 +53,7 @@ export default function SettingsPanel({ isOpen }: { isOpen: boolean }) {
   };
 
   const onTickChange = (value: number) => {
-    toCustom({ ...draft, tickMs: Math.min(Math.max(20, value), 2000) });
+    toCustom({ ...draft, tickMs: Math.min(Math.max(0, value), 2000) });
   };
 
   const onToggle = (
@@ -82,136 +83,145 @@ export default function SettingsPanel({ isOpen }: { isOpen: boolean }) {
     <Dialog
       open={isOpen}
       onClose={() => closeSettings()}
-      className="fixed inset-0 grid place-items-center font-gone"
+      className="fixed inset-0 grid place-items-center"
       backdropClassName="fixed inset-0 backdrop-blur-[2px]"
-      contentClassName="w-[560px] max-w-[90vw] rounded-xs bg-background text-text p-6 shadow-xl border-1 border-accent flex flex-col gap-4 overflow-auto"
+      contentClassName="w-[560px] max-w-[90vw] max-h-[95dvh] rounded-xs bg-background text-text p-0 shadow-xl border-1 border-accent flex flex-col font-start"
       ariaLabel="Settings"
     >
-      <div className="flex items-start justify-between gap-4">
+      <div className="px-6 py-4 my-4">
         <h2 className="text-lg font-semibold">Settings</h2>
       </div>
-      <section className="flex flex-nowrap gap-4 my-2">
-        <Label className="text-sm">Difficulty</Label>
-        <Select
-          value={draft.difficulty}
-          onValueChange={(v) => onDifficultyChange(v as Difficulty)}
-        >
-          <SelectTrigger className="w-56">
-            <SelectValue placeholder="Select difficulty" />
-          </SelectTrigger>
-          <SelectContent>
-            <SelectItem value="easy">Easy</SelectItem>
-            <SelectItem value="medium">Medium</SelectItem>
-            <SelectItem value="hard">Hard</SelectItem>
-            <SelectItem value="advanced"  disabled className="opacity-70">Advanced (comming soon)</SelectItem>
-            <SelectItem value="custom">Custom</SelectItem>
-          </SelectContent>
-        </Select>
-      </section>
+      <ScrollArea className="flex-1 min-h-0 px-6 pb-4 text-sm" viewportClassName="max-h-[70dvh]">
+        <section className="flex flex-nowrap gap-4 mb-6">
+          <Label className="text-sm">Difficulty</Label>
+          <Select
+            value={draft.difficulty}
+            onValueChange={(v) => onDifficultyChange(v as Difficulty)}
+          >
+            <SelectTrigger className="w-56">
+              <SelectValue placeholder="Select difficulty" />
+            </SelectTrigger>
+            <SelectContent className="font-start">
+              <SelectItem value="easy">Easy</SelectItem>
+              <SelectItem value="medium">Medium</SelectItem>
+              <SelectItem value="hard">Hard</SelectItem>
+              <SelectItem value="advanced" disabled className="opacity-70">
+                Advanced (comming soon)
+              </SelectItem>
+              <SelectItem value="custom">Custom</SelectItem>
+            </SelectContent>
+          </Select>
+        </section>
 
-      {/* Grid */}
-      <section className="flex flex-wrap gap-4 my-2">
-        <NumberField
-          label="Width"
-          value={draft.dims.w}
-          onChange={(n) => onDimsChange("w", n)}
-        />
-        <NumberField
-          label="Height"
-          value={draft.dims.h}
-          onChange={(n) => onDimsChange("h", n)}
-        />
-        <NumberField
-          label="Depth"
-          value={draft.dims.d}
-          onChange={(n) => onDimsChange("d", n)}
-        />
-      </section>
+        {/* Grid */}
+        <section className="flex flex-wrap gap-4 mb-6">
+          <NumberField
+            label="Width"
+            value={draft.dims.w}
+            onChange={(n) => onDimsChange("w", n)}
+          />
+          <NumberField
+            label="Height"
+            value={draft.dims.h}
+            onChange={(n) => onDimsChange("h", n)}
+          />
+          <NumberField
+            label="Depth"
+            value={draft.dims.d}
+            onChange={(n) => onDimsChange("d", n)}
+          />
+        </section>
 
         {/* Tick Rate */}
-      <section className="flex flex-wrap gap-4 my-2">
-        <NumberField
-          label="Tick (ms)"
-          value={draft.tickMs}
-          onChange={onTickChange}
-          min={30}
-          max={2000}
-        />
-      </section>
+        <section className="flex flex-wrap gap-4 mb-6">
+          <NumberField
+            label="Tick (ms)"
+            value={draft.tickMs}
+            onChange={onTickChange}
+            min={0}
+            max={2000}
+          />
+        </section>
 
-      {/* Toggles */}
-      <section className="grid grid-cols-2 gap-4 my-2">
-        <CheckboxRow
-          label="Wrap at edges"
-          checked={draft.wrap}
-          onChange={() => onToggle("wrap")}
-        />
-        <CheckboxRow
-          label="Show controls on head (comming soon)"
-          checked={draft.showControlsInHead}
-          onChange={() => onToggle("showControlsInHead")}
-          disabled
-        />
-        <CheckboxRow
-          label="Show controls in mini cube"
-          checked={draft.showControlsInMinicube}
-          onChange={() => onToggle("showControlsInMinicube")}
-        />
-      </section>
+        {/* Toggles */}
+        <section className="grid grid-cols-2 gap-4 mb-6">
+          <CheckboxRow
+            label="Wrap at edges"
+            checked={draft.wrap}
+            onChange={() => onToggle("wrap")}
+          />
+          <CheckboxRow
+            label="Show controls on head (comming soon)"
+            checked={draft.showControlsInHead}
+            onChange={() => onToggle("showControlsInHead")}
+            disabled
+          />
+          <CheckboxRow
+            label="Show controls in mini cube"
+            checked={draft.showControlsInMinicube}
+            onChange={() => onToggle("showControlsInMinicube")}
+          />
+        </section>
 
-      {/* Camera */}
-      <section className="grid grid-cols-2 gap-4 my-2">
-        <div className="space-y-2">
-          <Label className="text-sm">Camera mode</Label>
-          <Select
-            value={draft.cameraMode}
-            onValueChange={(v) => onCameraModeChange(v as CameraMode)}
-          >
-            <SelectTrigger className="w-56">
-              <SelectValue placeholder="Camera mode" />
-            </SelectTrigger>
-            <SelectContent>
-              <SelectItem value="fixed">Fixed</SelectItem>
-              <SelectItem value="free">Free</SelectItem>
-              <SelectItem value="autoOrbit"  disabled className="opacity-70">Auto Orbit (comming soon)</SelectItem>
-            </SelectContent>
-          </Select>
-        </div>
+        {/* Camera */}
+        <section className="grid grid-cols-2 gap-4 mb-6">
+          <div className="space-y-2">
+            <Label className="text-sm">Camera mode</Label>
+            <Select
+              value={draft.cameraMode}
+              onValueChange={(v) => onCameraModeChange(v as CameraMode)}
+            >
+              <SelectTrigger className="w-56">
+                <SelectValue placeholder="Camera mode" />
+              </SelectTrigger>
+              <SelectContent className="font-start">
+                <SelectItem value="fixed">Fixed</SelectItem>
+                <SelectItem value="free">Free</SelectItem>
+                <SelectItem value="autoOrbit" disabled className="opacity-70">
+                  Auto Orbit (comming soon)
+                </SelectItem>
+              </SelectContent>
+            </Select>
+          </div>
 
-        <div className="space-y-2">
-          <Label className="text-sm">Camera type</Label>
-          <Select
-            value={draft.cameraType}
-            onValueChange={(v) => onCameraTypeChange(v as CameraType)}
-          >
-            <SelectTrigger className="w-56">
-              <SelectValue placeholder="Camera type" />
-            </SelectTrigger>
-            <SelectContent>
-              <SelectItem value="perspective">Perspective</SelectItem>
-              <SelectItem value="isometric">Isometric</SelectItem>
-              <SelectItem value="2d" disabled className="opacity-70">2D (comming soon)</SelectItem>
-            </SelectContent>
-          </Select>
-        </div>
-      </section>
+          <div className="space-y-2">
+            <Label className="text-sm">Camera type</Label>
+            <Select
+              value={draft.cameraType}
+              onValueChange={(v) => onCameraTypeChange(v as CameraType)}
+            >
+              <SelectTrigger className="w-56">
+                <SelectValue placeholder="Camera type" />
+              </SelectTrigger>
+              <SelectContent className="font-start">
+                <SelectItem value="perspective">Perspective</SelectItem>
+                <SelectItem value="isometric">Isometric</SelectItem>
+                <SelectItem value="2d" disabled className="opacity-70">
+                  2D (comming soon)
+                </SelectItem>
+              </SelectContent>
+            </Select>
+          </div>
+        </section>
 
-      {/* Controls editor placeholder (will become its own component later) */}
-      <section className="space-y-3 my-2">
-        <h3 className="text-sm font-semibold">Controls</h3>
-        <p className="text-sm opacity-80">
-          Controls customization comming soon
-        </p>
-        {/* Example of calling toCustom when you integrate ControlsEditor:
+        {/* Controls editor placeholder (will become its own component later) */}
+        <section className="space-y-3 my-2">
+          <h3 className="text-sm ">Controls</h3>
+          <p className="text-sm opacity-80">
+            Controls customization comming soon.
+          </p>
+          {/* Example of calling toCustom when you integrate ControlsEditor:
             <ControlsEditor
               value={draft.controls}
               onChange={(next) => toCustom({ ...draft, controls: next })}
             />
          */}
-      </section>
-      <div className="flex justify-end gap-3 pt-2">
-        <Button onClick={onReset}>Reset</Button>
-        <Button onClick={onSave}>Save</Button>
+        </section>
+        <ScrollBar orientation="vertical" />
+      </ScrollArea>
+      <div className="flex justify-end gap-3 pt-2 pb-4 px-6">
+        <Button className="duration-100 p-1" onClick={onReset}>Reset</Button>
+        <Button className="duration-100 p-1" onClick={onSave}>Save</Button>
       </div>
     </Dialog>
   );
@@ -262,16 +272,26 @@ function CheckboxRow({
   label,
   checked,
   onChange,
-  disabled
+  disabled,
 }: {
   label: string;
   checked: boolean;
   onChange: () => void;
-  disabled?:  boolean;
+  disabled?: boolean;
 }) {
   return (
-    <label className={cn(`flex items-center gap-2 select-none cursor-pointer ${disabled ? "text-text/70" : ""}`)}>
-      <Checkbox checked={checked} onCheckedChange={onChange} disabled={disabled ?? false} />
+    <label
+      className={cn(
+        `flex items-center gap-2 select-none cursor-pointer ${
+          disabled ? "text-text/70" : ""
+        }`
+      )}
+    >
+      <Checkbox
+        checked={checked}
+        onCheckedChange={onChange}
+        disabled={disabled ?? false}
+      />
       <span className="text-sm">{label}</span>
     </label>
   );

@@ -6,6 +6,12 @@
   font-display: swap;
 }
 
+@font-face {
+  font-family: "Press Start";
+  src: url("/src/assets/fonts/PressStart.ttf");
+  font-display: swap;
+}
+
 @theme {
   --background: 4 6 16; /* near-black with a cool blue tint */
   --text: 230 245 255; /* icy white-blue for high contrast */
@@ -32,7 +38,8 @@
   --color-glow-2: rgb(var(--glow-2));
   --color-glow-3: rgb(var(--glow-3));
 
-  --font-gone: "YourGone", ui-monospace, monospace;
+  --font-gone: "Youre Gone", ui-monospace, monospace;
+  --font-start: "Press Start", ui-monospace, monospace;
 }
 
 #root,

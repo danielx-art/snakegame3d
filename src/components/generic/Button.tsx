@@ -14,7 +14,7 @@ export default function Button({
   ...props
 }: ButtonProps) {
   const base =
-    "inline-grid place-items-center rounded-md transition-colors select-none outline-none focus-visible:ring-[3px] min-w-fit min-h-fit";
+    "inline-grid place-items-center rounded-md transition-colors select-none outline-none focus-visible:ring-[3px] min-w-fit min-h-fit duration-100 cursor-pointer";
   const variants = {
     primary:
       // neon cyan pill, high contrast text, subtle glow on focus/hover
