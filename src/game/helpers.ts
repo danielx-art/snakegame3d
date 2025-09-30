@@ -15,3 +15,20 @@ export function cellToCentered(
     (p[2] + 0.5) * CELL - dims.sz / 2,
   ];
 }
+
+export function humanizeKey(code: string): string {
+  if (!code) return "?";
+  if (code.startsWith("Key") && code.length === 4) return code[3];
+  if (code === "Space") return "␣";
+  if (code.startsWith("Arrow")) {
+    const m: Record<string, string> = {
+      ArrowUp: "↑",
+      ArrowDown: "↓",
+      ArrowLeft: "←",
+      ArrowRight: "→",
+    };
+    return m[code] ?? code.replace("Arrow", "");
+  }
+  if (code.startsWith("Digit") && code.length === 6) return code[5];
+  return code;
+}

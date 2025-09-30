@@ -5,6 +5,7 @@ import { useLayoutEffect, useMemo, useRef } from "react";
 import { useStore } from "../../game/store/store";
 import { mainCameraPos, mainTarget } from "../../cameraSync";
 import type { Vec3 } from "../../game/store/types";
+import { humanizeKey } from "../../game/helpers";
 
 type FaceInfo = {
   key: string;
@@ -22,23 +23,6 @@ function useBindings(): Record<string, string> {
     IN: b.IN,
     OUT: b.OUT,
   };
-}
-
-function humanizeKey(code: string): string {
-  if (!code) return "?";
-  if (code.startsWith("Key") && code.length === 4) return code[3];
-  if (code === "Space") return "␣";
-  if (code.startsWith("Arrow")) {
-    const m: Record<string, string> = {
-      ArrowUp: "↑",
-      ArrowDown: "↓",
-      ArrowLeft: "←",
-      ArrowRight: "→",
-    };
-    return m[code] ?? code.replace("Arrow", "");
-  }
-  if (code.startsWith("Digit") && code.length === 6) return code[5];
-  return code;
 }
 
 function FaceLabels({ size = 0.9 }: { size?: number }) {

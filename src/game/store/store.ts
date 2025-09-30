@@ -17,6 +17,7 @@ const InitialState: RootState = {
   },
   colors: DEFAULT_COLORS,
   ui: {
+    firstTime: true,
     paused: false,
     showSettings: false,
   },
@@ -35,7 +36,7 @@ export const useStore = create<RootState>()(
   persist(
     () => InitialState,
     {
-      name: "snake-store-dev0",
+      name: "snake-store-dev1",
       storage: createJSONStorage(() => localStorage),
 
       // Persist only JSON-safe parts
@@ -54,6 +55,7 @@ export const useStore = create<RootState>()(
           },
         },
         ui: {
+          firstTime: s.ui.firstTime,
           paused: true,
           showSettings: s.ui.showSettings,
         },

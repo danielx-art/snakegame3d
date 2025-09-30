@@ -5,6 +5,7 @@ import { useStore } from "../../game/store/store";
 import type {
   CameraMode,
   CameraType,
+  Controls,
   Difficulty,
   Settings,
 } from "../../game/store/types";
@@ -21,9 +22,12 @@ import {
 import { Checkbox } from "../generic/Checkbox";
 import { cn } from "../../utils/cn";
 import { ScrollArea, ScrollBar } from "../generic/ScrollArea";
+import { humanizeKey } from "../../game/helpers";
 
 export default function SettingsPanel({ isOpen }: { isOpen: boolean }) {
   const currentSettings = useStore((s) => s.settings);
+
+  const controls = currentSettings.controls;
 
   const [draft, setDraft] = useState<Settings>(() =>
     structuredClone(currentSettings)
@@ -71,6 +75,7 @@ export default function SettingsPanel({ isOpen }: { isOpen: boolean }) {
   };
 
   const onReset = () => {
+    //toggleFirstTime(); //debugg
     setDraft(structuredClone(DEFAULT_SETTINGS.easy));
   };
 
@@ -91,7 +96,10 @@ export default function SettingsPanel({ isOpen }: { isOpen: boolean }) {
       <div className="px-6 py-4 my-4">
         <h2 className="text-lg font-semibold">Settings</h2>
       </div>
-      <ScrollArea className="flex-1 min-h-0 px-6 pb-4 text-sm" viewportClassName="max-h-[70dvh]">
+      <ScrollArea
+        className="flex-1 min-h-0 px-6 pb-4 text-sm"
+        viewportClassName="max-h-[70dvh]"
+      >
         <section className="flex flex-nowrap gap-4 mb-6">
           <Label className="text-sm">Difficulty</Label>
           <Select
@@ -208,7 +216,17 @@ export default function SettingsPanel({ isOpen }: { isOpen: boolean }) {
         <section className="space-y-3 my-2">
           <h3 className="text-sm ">Controls</h3>
           <p className="text-sm opacity-80">
-            Controls customization maybe sometime XD.
+            <div className="flex flex-col flex-nowrap gap-2">
+              {(Object.keys(controls) as Array<keyof Controls>).map((key) => (
+                <div
+                  key={`list_controls_${controls[key]}`}
+                  className="flex flex-row flex-nowrap gap-2"
+                >
+                  <p>{key}: </p>
+                  <p className="text-accent">{humanizeKey(controls[key])}</p>
+                </div>
+              ))}
+            </div>
           </p>
           {/* Example of calling toCustom when you integrate ControlsEditor:
             <ControlsEditor
@@ -218,10 +236,15 @@ export default function SettingsPanel({ isOpen }: { isOpen: boolean }) {
          */}
         </section>
         <ScrollBar orientation="vertical" />
+        <ScrollBar orientation="horizontal" />
       </ScrollArea>
       <div className="flex justify-end gap-3 pt-2 pb-4 px-6">
-        <Button className="duration-100 p-1" onClick={onReset}>Reset</Button>
-        <Button className="duration-100 p-1" onClick={onSave}>Save</Button>
+        <Button className="duration-100 p-1" onClick={onReset}>
+          Reset
+        </Button>
+        <Button className="duration-100 p-1" onClick={onSave}>
+          Save
+        </Button>
       </div>
     </Dialog>
   );

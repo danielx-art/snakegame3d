@@ -1,6 +1,7 @@
 import Scene3D from "./components/game/Scene3D";
 import Footer from "./components/layout/Footer";
 import GameOverScreen from "./components/layout/GameOverScreen";
+import StartScreen from "./components/layout/StartScreen";
 import VerticalNavBar from "./components/layout/VerticalNavBar";
 //import NavBar from "./components/layout/NavBar"; //<-only when vertical space > horizontal space
 import { GameLoop } from "./game/GameLoop";
@@ -12,6 +13,7 @@ export default function App() {
   return (
     <div className="relative w-full h-full font-start">
       {/* <NavBar /> */}
+      <StartScreen />
       <VerticalNavBar />
       <GameOverScreen />
       <GameLoop />

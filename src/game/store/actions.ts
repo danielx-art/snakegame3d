@@ -114,6 +114,10 @@ export function restart(): void {
 
 // UI
 
+export function toggleFirstTime(): void {
+  setState((prev)=>({...prev, ui: {...prev.ui, firstTime: !prev.ui.firstTime}}));
+}
+
 export function setPaused(paused: boolean): void {
   setState((prev) => ({ ...prev, ui: { ...prev.ui, paused } }));
 }

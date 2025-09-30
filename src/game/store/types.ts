@@ -53,6 +53,7 @@ export type GameRuntime = {
 };
 
 export type UIState = {
+  firstTime: boolean;
   paused: boolean;
   showSettings: boolean;
 };
@@ -79,8 +80,5 @@ export type PersistedRootState = {
     free: PersistedFreeCells;
     lastTickAt: null; //don't persist timers
   };
-  ui: {
-    paused: boolean;
-    showSettings: boolean;
-  };
+  ui: UIState;
 };

@@ -25,9 +25,9 @@ export default function Button({
       "bg-transparent text-text hover:text-primary hover:bg-primary/10 " +
       "focus-visible:ring-primary/30 border border-transparent",
     outline:
-      // neutral outline, cyan hover
-      "bg-transparent text-text border border-neutral/60 hover:border-primary/70 " +
-      "hover:text-primary focus-visible:ring-primary/30",
+      // cyan outline, hover accent
+      "bg-transparent text-primary border-2 border-primary/60 hover:border-primary/0 hover:text-background " +
+      "hover:bg-primary focus-visible:ring-primary/30",
   };
 
   return (
