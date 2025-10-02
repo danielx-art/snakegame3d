@@ -89,7 +89,7 @@ export default function SettingsPanel({ isOpen }: { isOpen: boolean }) {
       open={isOpen}
       onClose={() => closeSettings()}
       className="fixed inset-0 grid place-items-center"
-      backdropClassName="fixed inset-0 backdrop-blur-[2px]"
+      backdropClassName="fixed inset-0 bg-background"
       contentClassName="w-[560px] max-w-[90vw] max-h-[95dvh] rounded-xs bg-background text-text p-0 shadow-xl border-1 border-accent flex flex-col font-start"
       ariaLabel="Settings"
     >

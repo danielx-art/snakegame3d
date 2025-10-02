@@ -6,7 +6,7 @@ export const DEFAULT_COLORS = {
   snake: "#39FF14",
   snakeFront: "#39FF14",
   snakeBack: "#FFFF00",
-  snakeHead: "#F08A2E",
+  snakeHead: "#02fa0f",
   food: "#D83E4F",
   boundary: "#00FFEE",
   background: "#040610",

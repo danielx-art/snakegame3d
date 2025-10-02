@@ -8,8 +8,8 @@ import type { Vec3 } from "../../game/store/types";
 import { useEffect, useMemo, useRef } from "react";
 import * as THREE from "three";
 import { CELL } from "../../game/defaults";
-import AllInOneMesh from "./AllInOneMesh";
 import UniverseLines from "./UniverseLines";
+import AllInOneMesh from "./AllInOneMesh";
 
 function CameraSync({ target }: { target: Vec3 }) {
   const { camera } = useThree();
